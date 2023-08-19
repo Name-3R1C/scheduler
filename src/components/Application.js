@@ -30,24 +30,24 @@ export default function Application(props) {
       ...state,
       appointments
     });
-
-    axios
-      .put(`/api/appointments/${id}`, {
-        interview
-      })
-      .then(res => {
-        setState({
-          ...state,
-          appointments
-        });
-      })
-      .catch(error => {
-        console.error(error);
-      })
+  
+    return axios
+        .put(`/api/appointments/${id}`, {
+          interview
+        })
+        .then(res => {
+          setState({
+            ...state,
+            appointments
+          });
+        })
+        .catch(error => {
+          console.error(error);
+        })
   };
 
   function cancelInterview(id) {
-    axios
+    return axios
       .delete(`/api/appointments/${id}`)
       .then(() => {
         const appointments = {

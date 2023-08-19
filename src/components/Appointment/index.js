@@ -9,13 +9,13 @@ import Status from "./Status";
 import Confirm from "./Confirm";
 
 export default function Appointment(props) {
-  // console.log('Appointment ', props.interview);
   const EMPTY = "EMPTY";
   const SHOW = "SHOW";
   const CREATE = "CREATE";
   const SAVING = "SAVING";
   const DELETING = "DELETING";
   const CONFIRM = "CONFIRM";
+  const EDIT = "EDIT";
   const { mode, transition, back } = useVisualMode(
     props.interview ? SHOW : EMPTY
   );
@@ -27,21 +27,27 @@ export default function Appointment(props) {
     };
 
     transition(SAVING);
-    props.bookInterview(props.id, interview);
-    transition(SHOW);
+    props.bookInterview(props.id, interview)
+    .then(() => {
+      transition(SHOW);
+    })
+    .catch(error => console.error(error));
   };
 
   function confirmCancel() {
     transition(DELETING);
     props.cancelInterview(props.id)
-    transition(EMPTY); 
+    .then(() => {
+      transition(EMPTY)
+    })
+    .catch(error => console.error(error));
   }
   
   return (
     <article className="appointment">
       <Header time={props.time}/>
       {mode === EMPTY && <Empty onAdd={() => transition(CREATE)}/>}
-      
+
       {mode === SHOW && (
         <Show 
           student={props.interview.student}
