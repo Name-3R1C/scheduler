@@ -9,6 +9,7 @@ import Status from "./Status";
 import Confirm from "./Confirm";
 
 export default function Appointment(props) {
+  console.log('Appointment ', props);
   const EMPTY = "EMPTY";
   const SHOW = "SHOW";
   const CREATE = "CREATE";
@@ -52,6 +53,7 @@ export default function Appointment(props) {
         <Show 
           student={props.interview.student}
           interview={props.interview.interviewer}
+          onEdit={() => transition(EDIT)}
           onDelete={() => transition(CONFIRM)}
         />
       )}
@@ -76,6 +78,16 @@ export default function Appointment(props) {
         <Confirm 
           onConfirm={confirmCancel}
           onCancel={() => transition(SHOW)}
+        />
+      )}
+
+      {mode === EDIT && (
+        <Form
+          interviewers={props.interviewers}
+          interviewer={props.interview.interviewer}
+          student={props.interview.student}
+          onCancel={() => back()}
+          onSave = {save}
         />
       )}
     </article>
