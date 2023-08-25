@@ -25,11 +25,6 @@ export default function Application(props) {
       ...state.appointments,
       [id]: appointment
     };
-
-    setState({
-      ...state,
-      appointments
-    });
   
     return axios
         .put(`/api/appointments/${id}`, {
@@ -40,9 +35,6 @@ export default function Application(props) {
             ...state,
             appointments
           });
-        })
-        .catch(error => {
-          console.error(error);
         })
   };
 
@@ -63,9 +55,6 @@ export default function Application(props) {
           appointments
         }));
       })
-      .catch(error => {
-        console.error(error);
-      });
   };
   
   useEffect(() => {
