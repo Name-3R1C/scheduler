@@ -12,7 +12,7 @@ export default function Application(props) {
     bookInterview,
     cancelInterview
   } = useApplicationData();
-  console.log('Application ', state);
+  
   const dailyAppointments = getAppointmentsForDay(state, state.day);
   const interviewers = getInterviewersForDay(state, state.day);
 

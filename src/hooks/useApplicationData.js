@@ -11,21 +11,15 @@ export default function useApplicationData() {
 
   const setDay = day => setState({...state, day});
 
-  function updateSpots(targetDay, diff) {
-    console.log('updateSpots ', state);
-    const findDay = state.days.find(day => day.name === targetDay);
-    // const newDay = {...findDay, spots: (findDay.spots + diff)}
-    // const days = state.days.map((day) => (day.name === targetDay? newDay : day));
-    // setState(prev => ({...prev, days}));
+  function updateSpots(currentState, targetDay) {
+    const findDay = currentState.days.find(day => day.name === targetDay);
     const availableSpots = findDay.appointments.filter(
-      (appointmentID) => state.appointments[appointmentID].interview === null
+      (appointmentID) => currentState.appointments[appointmentID].interview === null
     ).length;
     const newDay = {...findDay, spots: availableSpots};
-    const days = state.days.map((day) => (day.name === targetDay? newDay : day));
-    console.log('days ', days, availableSpots);
+    const days = currentState.days.map((day) => (day.name === targetDay? newDay : day));
+    
     setState(prev => ({...prev, days}));
-
-    // console.log('after setstate ', state);
   }
 
   function bookInterview(id, interview) {
@@ -44,9 +38,8 @@ export default function useApplicationData() {
           interview
         })
         .then(() => {
-          // setState({ ...state, appointments });
           setState(prev => ({ ...prev, appointments }));
-          updateSpots(state.day, -1);
+          updateSpots({...state, appointments}, state.day);
         })
   };
 
@@ -63,7 +56,7 @@ export default function useApplicationData() {
         };
 
         setState(prev => ({ ...prev, appointments }));
-        updateSpots(state.day, 1);
+        updateSpots({...state, appointments}, state.day);
       })
   };
   
@@ -80,6 +73,6 @@ export default function useApplicationData() {
         interviewers: all[2].data}));
     });
   }, []);
-  console.log('useApplicationData ', state);
+  
   return { state, setDay, bookInterview, cancelInterview }
 }
