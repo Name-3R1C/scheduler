@@ -13,7 +13,7 @@ Interview Scheduler is a single-page application (SPA) that allows users to book
 1. Clone [this repository](https://github.com/Name-3R1C/scheduler.git) to your local machine.
 2. Navigate to the project directory.
 3. Install dependencies with `npm install`.
-4. Setup backend sever by navigating to [scheduler-api](https://github.com/Name-3R1C/scheduler-api) and follow setup instructions 
+4. Setup backend server by navigating to [scheduler-api](https://github.com/Name-3R1C/scheduler-api) and follow setup instructions 
 
 ## Running Webpack Development Server
 
