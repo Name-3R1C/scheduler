@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import InterviewerList from "components/InterviewerList";
 import Button from "components/Button";
-import { setDefaultResultOrder } from "dns";
 
 export default function Form(props) {
   const [student, setStudent] = useState(props.student || "");
