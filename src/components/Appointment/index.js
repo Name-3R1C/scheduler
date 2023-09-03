@@ -77,8 +77,8 @@ export default function Appointment(props) {
 
       {mode === CONFIRM && (
         <Confirm 
-          onConfirm={() => destroy()}
-          onCancel={() => transition(SHOW)}
+          onConfirm={destroy}
+          onCancel={back}
         />
       )}
 
@@ -95,15 +95,14 @@ export default function Appointment(props) {
       {mode === ERROR_DELETE && (
         <Error 
           message={"Could not delete appointment"}
-          // onClose={() => transition(SHOW)}
-          onClose={() => back()}
+          onClose={back}
         />
       )}
 
       {mode === ERROR_SAVE && (
         <Error 
           message={"Could not save appointment"}
-          onClose={() => transition(SHOW)}
+          onClose={back}
         />
       )}
     </article>
